@@ -1,0 +1,66 @@
+from tkinter import *
+from sys import *
+from math import *
+import time
+import os
+
+#keydown function
+def click():
+    ide = identry.get() #this will collect the info
+    od = odentry.get()
+    ht = htentry.get()
+    rai = (int(ide))/2
+    rao = (int(od))/2
+    vol = (3.14)*(float(rao)**2)*float(ht)-(3.14*(float(rai)**2)*float(ht))
+    output.delete(0.0, END)
+    output.insert(END, vol)
+#main
+window = Tk()
+window.title("Block Calculator v1.1")
+window.geometry("550x400")
+window.configure(background="black")
+
+#how to insert an image or logo
+photo1 = file="4D.gif"
+Label (window, image=photo1, bg="black") .grid(row=0, column=0, sticky=W)
+
+#make id label
+Label (window, text="Enter the block inner diameter", bg="black", fg="white", font="none 12 bold") .grid(row=1, column=0, sticky=W)  
+#make id text entry box
+identry = Entry(window, width=10, bg="white")
+identry.grid(row=2, column=0, sticky=W)
+
+#make od label
+Label (window, text="Enter the block outer diameter", bg="black", fg="white", font="none 12 bold") .grid(row=3, column=0, sticky=W)  
+#make od text entry box
+odentry = Entry(window, width=10, bg="white")
+odentry.grid(row=4, column=0, sticky=W)
+
+#make ht label
+Label (window, text="Enter the block height", bg="black", fg="white", font="none 12 bold") .grid(row=5, column=0, sticky=W)  
+#make ht text entry box
+htentry = Entry(window, width=10, bg="white")
+htentry.grid(row=6, column=0, sticky=W)
+
+#make a submit button
+Button (window, text="SUBMIT", width=6, command=click) .grid(row=7, column=0, sticky=W)
+
+#create block vol label
+Label (window, text="Total block volume, cm^3", bg='black', fg='white', font='none 12 bold') .grid(row=8, column=0, sticky=W)
+#create block vol text box
+output = Text(window, width=20, height=1, wrap=WORD, background="white")
+output.grid(row=9, column=0, columnspan=2, sticky=W)
+
+#exit button
+Label (window, text="Click to exit", bg="black", fg="white", font="none 12 bold") .grid(row=10, column=0, sticky=W)  
+
+#exit function
+def close_window():
+    window.destroy()
+    exit()
+
+#exit button
+Button (window, text="Exit", width=7, command=close_window) .grid(row=11, column=0, sticky=W)
+
+#you need to have this loop to maintain the program window stays open
+window.mainloop()
