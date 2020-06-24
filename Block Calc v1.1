@@ -10,15 +10,17 @@ def click():
     od = odentry.get()
     ht = htentry.get()
     wt = wtentry.get()
-    rai = (int(ide))/2
-    rao = (int(od))/2
+    rai = (float(ide))/2
+    rao = (float(od))/2
     vol = (3.14)*(float(rao)**2)*float(ht)-(3.14*(float(rai)**2)*float(ht))
-    vol1 = (3.14*(float(rai)**2)*float(ht))
-#    den = wt1/vol
+    vol1 = (3.14)*(float(rai)**2)*float(ht)
+    wt1 = float(wt)
+    den = float(wt1)/vol
     output1.delete(0.0, END)
     output1.insert(END, vol)
     output2.insert(END, vol1)  
-    output3.insert(END, wt) 
+    output3.insert(END, den) 
+    output4.insert(END, wt)
       
 #main
 window = Tk()
@@ -58,7 +60,7 @@ wtentry.grid(row=8, column=0, sticky=W)
 Label (window, text="Enter flow rate, gpm", bg="black", fg="white", font="none 12 bold") .grid(row=9, column=0, sticky=W)  
 #make wt text entry box
 wtentry = Entry(window, width=10, bg="white")
-wtentry.grid(row=10, column=0, sticky=W)
+wtentry.grid(row=10, column=0, sticky=W)  
 
 #make a submit button
 Button (window, text="SUBMIT", width=6, command=click) .grid(row=11, column=0, sticky=W)
@@ -84,9 +86,8 @@ output3.grid(row=17, column=0, columnspan=2, sticky=W)
 #create block residence time label
 Label (window, text="Estimated empty bed contact time", bg='black', fg='white', font='none 12 bold') .grid(row=18, column=0, sticky=W)
 #create block residence time text box
-output3 = Text(window, width=20, height=1, wrap=WORD, background="white")
-output3.grid(row=19, column=0, columnspan=2, sticky=W)
-
+output4 = Text(window, width=20, height=1, wrap=WORD, background="white")
+output4.grid(row=19, column=0, columnspan=2, sticky=W)
 
 #exit button label
 Label (window, text="Click to exit", bg="black", fg="white", font="none 12 bold") .grid(row=20, column=0, sticky=W)  
