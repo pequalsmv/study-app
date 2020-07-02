@@ -1,0 +1,123 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Jul  2 10:40:11 2020
+@author: cvizcaino
+"""
+from tkinter import *
+from PIL import ImageTk, Image
+from sys import *
+from math import *
+import time
+import os
+
+
+#keydown function
+def click():
+    ide = identry.get() #this will collect the info
+    od = odentry.get()
+    ht = htentry.get()
+    wt = wtentry.get()
+    fr = frentry.get()
+    rai = (float(ide))/2
+    rao = (float(od))/2
+    vol = (3.14159)*(float(rao)**2)*float(ht)-(3.14159*(float(rai)**2)*float(ht))
+    vol1 = (3.14159)*(float(rai)**2)*float(ht)
+    wt1 = float(wt)/float(vol*16.39)
+    den = wt1
+    rtime = 60*(vol/(float(fr)*231))
+    output1.delete(0.0, END)
+    output1.insert(END, vol)
+    output2.delete(0.0, END)
+    output2.insert(END, vol1)
+    output3.delete(0.0, END)
+    output3.insert(END, den)
+    output4.delete(0.0, END)
+    output4.insert(END, rtime)
+
+#main
+window = Tk()
+window.title("Block Calculator v1.2")
+window.geometry("475x750")
+window.configure(background="black")
+
+#how to insert an image or logo
+#use direct file path unless image is also stored in same folder as .exe
+my_img = ImageTk.PhotoImage(Image.open("tesseractw.png"))
+my_label = Label(image=my_img)
+my_label.grid(row=0, column=0, columnspan=5, pady=30, padx=145, sticky=W)
+
+#make label that tells user to enter data
+Label (window, text="Enter all values into these boxes then click on 'Calculate'.", bg="black", fg="white", font="none 12 bold") .grid(row=1, column=0, columnspan=3, pady=30, sticky=W)
+
+#make id label
+Label (window, text="Block Inner Diameter, in", bg="black", fg="white", font="none 12 bold") .grid(row=2, column=0, sticky=W)  
+#make id text entry box
+identry = Entry(window, width=10, bg="white")
+identry.grid(row=2, column=2, sticky=W)
+
+
+#make od label
+Label (window, text="Block Outer Diameter, in", bg="black", fg="white", font="none 12 bold") .grid(row=4, column=0, sticky=W)  
+#make od text entry box
+odentry = Entry(window, width=10, bg="white")
+odentry.grid(row=4, column=2, sticky=W)
+
+#make ht label
+Label (window, text="Block Height, in", bg="black", fg="white", font="none 12 bold") .grid(row=6, column=0, sticky=W)  
+#make ht text entry box
+htentry = Entry(window, width=10, bg="white")
+htentry.grid(row=6, column=2, sticky=W)
+
+#make block weight label
+Label (window, text="Block Weight, g", bg="black", fg="white", font="none 12 bold") .grid(row=8, column=0, sticky=W)  
+#make ht text entry box
+wtentry = Entry(window, width=10, bg="white")
+wtentry.grid(row=8, column=2, sticky=W)
+
+#make flow rate label
+Label (window, text="Flow Rate, gpm", bg="black", fg="white", font="none 12 bold") .grid(row=10, column=0, sticky=W)  
+#make wt text entry box
+frentry = Entry(window, width=10, bg="white")
+frentry.grid(row=10, column=2, sticky=W)  
+
+#make a calc button
+Button (window, text="Calculate", width=6, command=click) .grid(row=12, column=2, pady=20, padx=15, ipadx=5, sticky=W)
+
+#create label that just says 'here are your results'
+Label (window, text="Here are your results:", bg="black", fg="white", font="none 12 bold") .grid(row=13, column=0, columnspan=3, pady=20, sticky=W)
+
+#create block total vol label
+Label (window, text="Total block volume, in^3 =", bg='black', fg='white', font='none 12 bold') .grid(row=16, column=0, sticky=W)
+#create block total vol text box
+output1 = Text(window, width=20, height=1, wrap=WORD, background="white")
+output1.grid(row=16, column=2, columnspan=2, sticky=W)
+
+#create block center vol label
+Label (window, text="Total center-core volume, in^3 =", bg='black', fg='white', font='none 12 bold') .grid(row=18, column=0, sticky=W)
+#create block center vol text box
+output2 = Text(window, width=20, height=1, wrap=WORD, background="white")
+output2.grid(row=18, column=2, columnspan=2, sticky=W)
+
+#create block density label
+Label (window, text="Total block density, g/mL =", bg='black', fg='white', font='none 12 bold') .grid(row=20, column=0, sticky=W)
+#create block density text box
+output3 = Text(window, width=20, height=1, wrap=WORD, background="white")
+output3.grid(row=20, column=2, columnspan=2, sticky=W)
+
+#create block residence time label
+Label (window, text="Est. empty bed contact time, sec =", bg='black', fg='white', font='none 12 bold') .grid(row=22, column=0, sticky=W)
+#create block residence time text box
+output4 = Text(window, width=20, height=1, wrap=WORD, background="white")
+output4.grid(row=22, column=2, columnspan=2, sticky=W)
+
+#exit button label
+#Label (window, text="Click to exit", bg="black", fg="white", font="none 12 bold") .grid(row=28, column=1, sticky=W)  
+#exit function
+def close_window():
+    window.destroy()
+    exit()
+#exit button
+Button (window, text="Exit", width=7, command=close_window) .grid(row=30, column=2, pady=20, padx=15, sticky=W)
+
+#you need to have this loop to maintain the program window stays open
+window.mainloop()
