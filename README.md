@@ -1,4 +1,4 @@
-# study-app
+# Tkinter app 
 This app will use the Tkinter GUI, for more information use the following link.
 #https://docs.python.org/2/library/tkinter.html
 
